@@ -88,8 +88,11 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        index = self.hash_index(key)
-        self.hash_data[index] = value
+        hash_index = get_index(key)
+        if self.hash_data[hash_index] is None:
+            self.hash_data[hash_index] = HashTableEntry(key, value)
+        hash_index = self.hash_index(key)
+        self.hash_data[hash_index] = value
 
     def delete(self, key):
         """
@@ -112,6 +115,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+
         index = self.hash_index(key)
         return self.hash_data[index]
 
