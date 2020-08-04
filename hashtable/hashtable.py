@@ -24,7 +24,8 @@ class HashTable:
     def __init__(self, capacity):
         # Your code here
         self.capacity = MIN_CAPACITY
-        self.hash_data = [None] * MIN_CAPACITY
+        self.hash_data = [None] * self.capacity
+        self.size = 0
 
     def get_num_slots(self):
         """
@@ -46,7 +47,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        return self.capacity
+        return self.size/self.capacity
 
     def fnv1(self, key):
         """
