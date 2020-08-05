@@ -21,8 +21,6 @@ def slowfun(x, y):
     output, but completes quickly instead of taking ages to run.
     """
     # Your code here
-    modMe = 982451653
-    z = x + y
 
     # v = math.pow(x, y)  # x ^ y
     # v = math.factorial(v)  # v is v *v-1 * v-2 * v-3 ... until 1
@@ -35,7 +33,6 @@ def slowfun(x, y):
         v %= 982451653
         cache[x, y] = v
     return cache[x, y]
-    print(cache)
     # w = 1
     # u = 1
 
@@ -48,8 +45,6 @@ def slowfun(x, y):
     # v %= modMe
     # cache[(x, y)] = v
     # print(f'~~~cache here: {cache}')
-
-    return v
 
 
 # Do not modify below this line!
