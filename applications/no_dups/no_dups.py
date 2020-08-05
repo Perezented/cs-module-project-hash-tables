@@ -1,6 +1,15 @@
 def no_dups(s):
     # Your code here
-    print(s)
+    cache = {}
+    sentence = ''
+    s = s.split()
+    for word in s:
+        if word not in cache:
+            cache[word] = word
+    for key in cache.keys():
+        sentence += str(key) + ' '
+    print(sentence)
+    return sentence.lstrip()
 
 
 if __name__ == "__main__":
