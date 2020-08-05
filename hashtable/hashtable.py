@@ -1,3 +1,50 @@
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+
+    def __str__(self):
+        resu = ''
+        current = self.head
+
+        while current is not None:
+            resu += f'({current.value})'
+            if current.next is not None:
+                resu += ' -> '
+            current = current.next
+        return resu
+
+    def insert_at_head(self, node):
+        node.next = self.head
+        self.head = node
+
+    def find(self, value):
+        current = self.head
+        while current is not None:
+            if current.value == value:
+                return current
+            current = current.next
+        return None
+
+    def delete(self, value):
+        current = self.head
+
+        if current.value == value:
+            self.head = self.head.get_next
+            return current
+
+        prev = current
+        current = current.get_next
+        while current is not None:
+            if current.value == value:
+                prev.next = current.next
+                return current
+            else:
+                prev = prev.next
+                current = current.get_next
+        return None
+
+
 class HashTableEntry:
     """
     Linked List hash table key/value pair
@@ -24,7 +71,7 @@ class HashTable:
     def __init__(self, capacity):
         # Your code here
         self.capacity = MIN_CAPACITY
-        self.hash_data = [None] * self.capacity
+        self.hashmap = [LinkedList()] * self.capacity
         self.size = 0
 
     def get_num_slots(self):
@@ -88,11 +135,33 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        hash_index = get_index(key)
-        if self.hash_data[hash_index] is None:
-            self.hash_data[hash_index] = HashTableEntry(key, value)
-        hash_index = self.hash_index(key)
-        self.hash_data[hash_index] = value
+        index = self.hash_index(key)
+        current = self.hashmap[index].head
+        while current:
+            if current.key == key:
+                current.value == value
+            current = current.next
+
+        node = HashTableEntry(key, value)
+        self.hashmap[index].insert_at_head(node)
+        self.size += 1
+        # # self.size += 1
+        # if self.hash_data[index] is None:
+        #     self.hash_data[index] = node
+        #     print(self.hash_data[index])
+        # else:
+        #     if self.hash_data[index].key == key:
+        #         self.hash_data[index].value = value
+        #     else:
+        #         old_head = self.hash_data[index]
+        #         node.set_next(old_head)
+        #         self.hash_data[index] = node
+
+        # old_head = self.hash_data[index].head
+        # node = self.hash_data[index].head
+        # node.next = old_head
+        # # print(self.hash_data[index].key)
+        # return
 
     def delete(self, key):
         """
@@ -103,8 +172,11 @@ class HashTable:
         Implement this.
         """
         # Your code here
-        index = self.hash_index(key)
-        self.hash_data[index] = None
+
+        self.put(key, None)
+        self.size -= 1
+        # index = self.hash_index(key)
+        # self.hash_data[index] = None
 
     def get(self, key):
         """
@@ -115,9 +187,25 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
         index = self.hash_index(key)
-        return self.hash_data[index]
+        current = self.hashmap[index].head
+        while current:
+            if current.key == key:
+                return current.value
+            current = current.next
+        return None
+
+        # while current is not None:
+        #     # print(f'current: {current.key}')
+        #     # print(f'key: {key}')
+        #     if current.key == key:
+        #         # print(current)
+        #         return current
+        #     current = current.next
+        # return None
+
+        # index = self.hash_index(key)
+        # return self.hash_data[index]
 
     def resize(self, new_capacity):
         """
@@ -127,6 +215,15 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        if self.get_load_factor() > 0.7:
+            old_map = self.hashmap
+            self.hashmap = [LinkedList()] * new_capacity
+            for item in old_map:
+                current = item.head
+            while current:
+                self.put(current.key, current.value)
+                current = current.next
+        self.capacity = new_capacity
 
 
 if __name__ == "__main__":
