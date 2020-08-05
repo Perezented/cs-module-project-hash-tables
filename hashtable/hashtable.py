@@ -3,17 +3,6 @@ class LinkedList:
     def __init__(self):
         self.head = None
 
-    def __str__(self):
-        resu = ''
-        current = self.head
-
-        while current is not None:
-            resu += f'({current.value})'
-            if current.next is not None:
-                resu += ' -> '
-            current = current.next
-        return resu
-
     def insert_at_head(self, node):
         node.next = self.head
         self.head = node
@@ -145,23 +134,6 @@ class HashTable:
         node = HashTableEntry(key, value)
         self.hashmap[index].insert_at_head(node)
         self.size += 1
-        # # self.size += 1
-        # if self.hash_data[index] is None:
-        #     self.hash_data[index] = node
-        #     print(self.hash_data[index])
-        # else:
-        #     if self.hash_data[index].key == key:
-        #         self.hash_data[index].value = value
-        #     else:
-        #         old_head = self.hash_data[index]
-        #         node.set_next(old_head)
-        #         self.hash_data[index] = node
-
-        # old_head = self.hash_data[index].head
-        # node = self.hash_data[index].head
-        # node.next = old_head
-        # # print(self.hash_data[index].key)
-        # return
 
     def delete(self, key):
         """
@@ -175,8 +147,6 @@ class HashTable:
 
         self.put(key, None)
         self.size -= 1
-        # index = self.hash_index(key)
-        # self.hash_data[index] = None
 
     def get(self, key):
         """
@@ -194,18 +164,6 @@ class HashTable:
                 return current.value
             current = current.next
         return None
-
-        # while current is not None:
-        #     # print(f'current: {current.key}')
-        #     # print(f'key: {key}')
-        #     if current.key == key:
-        #         # print(current)
-        #         return current
-        #     current = current.next
-        # return None
-
-        # index = self.hash_index(key)
-        # return self.hash_data[index]
 
     def resize(self, new_capacity):
         """

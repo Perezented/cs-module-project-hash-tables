@@ -20,12 +20,6 @@ class LinkedList:  # This corresponds to the HashTable class
     def insert_at_head(self, node):
         node.next = self.head
         self.head = node
-        # if self.head is None:
-        #     node.next = None
-        #     self.head = node
-        # else:
-        #     node.next = self.head
-        #     self.head = node
 
     def delete(self, value):
         if self.head.value = value:
