@@ -1,6 +1,6 @@
 def no_dups(s):
     # Your code here
-
+    print(s)
 
 
 if __name__ == "__main__":
