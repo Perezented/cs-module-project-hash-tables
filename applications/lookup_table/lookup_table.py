@@ -33,18 +33,6 @@ def slowfun(x, y):
         v %= 982451653
         cache[x, y] = v
     return cache[x, y]
-    # w = 1
-    # u = 1
-
-    # for i in range(y):
-    #     w *= x
-    # for i in range(1, w):
-    #     u *= i
-    #     v = u
-    # v //= z
-    # v %= modMe
-    # cache[(x, y)] = v
-    # print(f'~~~cache here: {cache}')
 
 
 # Do not modify below this line!
@@ -52,9 +40,3 @@ for i in range(50000):
     x = random.randrange(2, 14)
     y = random.randrange(3, 6)
     print(f'{i}: {x},{y}: {slowfun(x, y)}')
-
-
-# 5, 4 624454993
-# 5, 3 179017319
-#      179017319
-#      476581239
